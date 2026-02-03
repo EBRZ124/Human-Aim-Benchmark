@@ -2,7 +2,7 @@ import pygame
 pygame.init()
 pygame.mixer.init()
 
-global_scaler = 1
+global_scaler = 0.85
 
 original_images = {}
 
@@ -16,16 +16,18 @@ def load_assets():
     
     original_images = {
         # ------------------------ MENU ASSETS ------------------------
-        "main_menu_bg": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/main_bg.png"),
-        "circle_numbers_timed_bg": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle_numbers_timed_bg.png"),
-        "background_dimmer": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/background_dimmer.png"),
-        "playing_area": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/playing_area.png"),
-        "n_circles_timed": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/n_circles_timed.png"),
-        "circle": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle.png"),
-        "3": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/3.png"),
-        "2": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/2.png"),
-        "1": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/1.png"),
-        "result_screen": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/result_screen.png")
+        "main_menu_bg": pygame.image.load("../human_benchmark/graphics/main_bg.png"),
+        "circle_numbers_timed_bg": pygame.image.load("../human_benchmark/graphics/circle_numbers_timed_bg.png"),
+        "background_dimmer": pygame.image.load("../human_benchmark/graphics/background_dimmer.png"),
+        "playing_area": pygame.image.load("../human_benchmark/graphics/playing_area.png"),
+        "n_circles_timed": pygame.image.load("../human_benchmark/graphics/n_circles_timed.png"),
+        "circle": pygame.image.load("../human_benchmark/graphics/circle.png"),
+        "3": pygame.image.load("../human_benchmark/graphics/3.png"),
+        "2": pygame.image.load("../human_benchmark/graphics/2.png"),
+        "1": pygame.image.load("../human_benchmark/graphics/1.png"),
+        "result_screen": pygame.image.load("../human_benchmark/graphics/result_screen.png"),
+        "exit_button": pygame.image.load("../human_benchmark/graphics/exit-result-button.png"),
+        "start_button": pygame.image.load("../human_benchmark/graphics/start_level_button.png")
     }
 
 def apply_scaling():

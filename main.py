@@ -9,7 +9,7 @@ resolutions_4_3 = [
     (1440, 1080)
 ]
 
-current_resolution = 2
+current_resolution = 1
 pygame.display.set_caption("Human Benchmark")
 screen_scaler = global_variables.global_scaler
 screen = pygame.display.set_mode(resolutions_4_3[current_resolution])
@@ -22,7 +22,7 @@ def main_menu():
         mouse_pos = pygame.mouse.get_pos()
         screen.blit(global_variables.images["main_menu_bg"], (0, 0))
         PLAY_BUTTON = Button(image=None, pos=(720*screen_scaler, 540*screen_scaler),
-                        text_input="PLAY", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="#E57B1E", hovering_color="White")
+                        text_input="PLAY", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="White", hovering_color="White")
         
         for button in [PLAY_BUTTON]:
             button.changeColor(mouse_pos)
@@ -41,11 +41,11 @@ def main_menu():
         pygame.display.update()
 
 def new_cricle_x():
-    circle_pos_x = random.randint(160, 1270)
+    circle_pos_x = random.randint(160, 1270)*screen_scaler
     return circle_pos_x
 
 def new_cricle_y():
-    circle_pos_y = random.randint(150, 940)
+    circle_pos_y = random.randint(150, 940)*screen_scaler
     return circle_pos_y
 
 def circles_numbers_timed():
@@ -55,13 +55,15 @@ def circles_numbers_timed():
     score = 0
 
     while ShowStartScreen:
+        mouse_pos = pygame.mouse.get_pos()
         screen.blit(global_variables.images["circle_numbers_timed_bg"], (0, 0))
         screen.blit(global_variables.images["background_dimmer"], (0, 0))
         screen.blit(global_variables.images["n_circles_timed"], (0, 0))
 
-        space_to_start = global_variables.result_screen_font(int(55*screen_scaler)).render(f"Press SPACE to start", True, "White")
-        start_rect = space_to_start.get_rect(center=(720*screen_scaler, 850*screen_scaler))
-        screen.blit(space_to_start, start_rect)
+        start_button = Button(image=global_variables.images["start_button"], pos=(720*screen_scaler, 900*screen_scaler), text_input="START LVL", 
+                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        start_button.changeColor(mouse_pos)
+        start_button.update(screen)  
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -75,6 +77,12 @@ def circles_numbers_timed():
                     circle_pos_y = new_cricle_y()    
                 if event.key == pygame.K_ESCAPE:
                     ShowStartScreen = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if start_button.checkForInput(mouse_pos):
+                    ShowStartScreen = False
+                    running = True
+                    circle_pos_x = new_cricle_x()
+                    circle_pos_y = new_cricle_y()                
 
         pygame.display.flip()
 
@@ -134,6 +142,11 @@ def result_circles_numbers_timed(time_spent):
         time_spen_rect = time_spent_text.get_rect(center=(720*screen_scaler, 620*screen_scaler))
         screen.blit(time_spent_text, time_spen_rect)
 
+        exit_button = Button(image=global_variables.images["exit_button"], pos=(720*screen_scaler, 860*screen_scaler), text_input="Exit level", 
+                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        exit_button.changeColor(mouse_pos)
+        exit_button.update(screen)  
+
         events = pygame.event.get()
 
         for event in events:
@@ -142,6 +155,9 @@ def result_circles_numbers_timed(time_spent):
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    results = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if exit_button.checkForInput(mouse_pos):
                     results = False
 
         pygame.display.flip()
