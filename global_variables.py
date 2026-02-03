@@ -17,7 +17,12 @@ def load_assets():
     original_images = {
         # ------------------------ MENU ASSETS ------------------------
         "main_menu_bg": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/main_bg.png"),
-    
+        "circle_numbers_timed_bg": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle_numbers_timed_bg.png"),
+        "playing_area": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/playing_area.png"),
+        "circle": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle.png"),
+        "3": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/3.png"),
+        "2": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/2.png"),
+        "1": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/1.png"),
     }
 
 def apply_scaling():

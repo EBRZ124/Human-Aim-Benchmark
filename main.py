@@ -1,4 +1,4 @@
-import pygame, sys, global_variables
+import pygame, sys, global_variables, time, random
 from buttons import Button
 
 pygame.init()
@@ -36,13 +36,25 @@ def main_menu():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(mouse_pos):
-                    play_circle_game()
+                    circles_numbers_timed()
 
         pygame.display.update()
 
-def play_circle_game():
+def new_cricle_x():
+    circle_pos_x = random.randint(130, 1290)
+    return circle_pos_x
+
+def new_cricle_y():
+    circle_pos_y = random.randint(95, 980)
+    return circle_pos_y
+
+def circles_numbers_timed():
     ShowStartScreen = True
     running = False
+    wait = False
+    screen.blit(global_variables.images["circle_numbers_timed_bg"], (0, 0))
+    screen.blit(global_variables.images["playing_area"], (0, 0))
+
 
     while ShowStartScreen:
         for event in pygame.event.get():
@@ -53,15 +65,19 @@ def play_circle_game():
                 if event.key == pygame.K_SPACE:
                     ShowStartScreen = False
                     running = True
+                    circle_pos_x = new_cricle_x()
+                    circle_pos_y = new_cricle_y()
                 if event.key == pygame.K_ESCAPE:
                     ShowStartScreen = False
 
         pygame.display.update()
 
-
     while running:
         dt = clock.tick(60)
         mouse_pos = pygame.mouse.get_pos()
+
+        circle = Button(image=global_variables.images["circle"], pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
+        circle.update(screen)
 
         events = pygame.event.get()
 
@@ -72,6 +88,12 @@ def play_circle_game():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if circle.checkForInput(mouse_pos):
+                    circle_pos_x= new_cricle_x()
+                    circle_pos_y= new_cricle_y()
+                    circle = Button(image=global_variables.images["circle"], pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
+                    circle.update(screen)
 
         pygame.display.update()
 
