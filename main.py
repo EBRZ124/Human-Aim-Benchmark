@@ -41,22 +41,26 @@ def main_menu():
         pygame.display.update()
 
 def new_cricle_x():
-    circle_pos_x = random.randint(130, 1290)
+    circle_pos_x = random.randint(150, 1270)
     return circle_pos_x
 
 def new_cricle_y():
-    circle_pos_y = random.randint(95, 980)
+    circle_pos_y = random.randint(110, 940)
     return circle_pos_y
 
 def circles_numbers_timed():
     ShowStartScreen = True
     running = False
     wait = False
-    screen.blit(global_variables.images["circle_numbers_timed_bg"], (0, 0))
-    screen.blit(global_variables.images["playing_area"], (0, 0))
-
+    score = 0
 
     while ShowStartScreen:
+        screen.blit(global_variables.images["circle_numbers_timed_bg"], (0, 0))
+
+        font = pygame.font.Font(None, int(100*screen_scaler))
+        score_text = font.render("Press SPACE to start", True, (255, 255, 255))
+        screen.blit(score_text, (370*screen_scaler, 530*screen_scaler))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -66,18 +70,24 @@ def circles_numbers_timed():
                     ShowStartScreen = False
                     running = True
                     circle_pos_x = new_cricle_x()
-                    circle_pos_y = new_cricle_y()
+                    circle_pos_y = new_cricle_y()    
                 if event.key == pygame.K_ESCAPE:
                     ShowStartScreen = False
 
-        pygame.display.update()
+        pygame.display.flip()
 
     while running:
         dt = clock.tick(60)
         mouse_pos = pygame.mouse.get_pos()
-
+        screen.blit(global_variables.images["circle_numbers_timed_bg"], (0, 0))
+        screen.blit(global_variables.images["playing_area"], (0, 0))
+        
         circle = Button(image=global_variables.images["circle"], pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
         circle.update(screen)
+
+        font = pygame.font.Font(None, int(60*screen_scaler))
+        score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+        screen.blit(score_text, (121*screen_scaler, 30*screen_scaler))
 
         events = pygame.event.get()
 
@@ -90,11 +100,12 @@ def circles_numbers_timed():
                     running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if circle.checkForInput(mouse_pos):
+                    score += 1
                     circle_pos_x= new_cricle_x()
                     circle_pos_y= new_cricle_y()
                     circle = Button(image=global_variables.images["circle"], pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
                     circle.update(screen)
 
-        pygame.display.update()
+        pygame.display.flip()
 
 main_menu()
