@@ -9,7 +9,7 @@ resolutions_4_3 = [
     (1440, 1080)
 ]
 
-current_resolution = 1
+current_resolution = 2
 pygame.display.set_caption("Human Benchmark")
 screen_scaler = global_variables.global_scaler
 screen = pygame.display.set_mode(resolutions_4_3[current_resolution])
@@ -49,16 +49,54 @@ def new_cricle_y():
     return circle_pos_y
 
 def circles_numbers_timed():
-    ShowStartScreen = True
+    show_n_circles_timed = True
     running = False
     wait = False
     score = 0
+    c5 = 0
+    c10 = 7
+    c20 = 2
+    c1x = 9
+    c2x = 4
+    c3x = 5
 
-    while ShowStartScreen:
+    while show_n_circles_timed:
         mouse_pos = pygame.mouse.get_pos()
         screen.blit(global_variables.images["circle_numbers_timed_bg"], (0, 0))
         screen.blit(global_variables.images["background_dimmer"], (0, 0))
         screen.blit(global_variables.images["n_circles_timed"], (0, 0))
+
+        difficulty_images = [global_variables.images["5_circles_unselected"], global_variables.images["10_circles_unselected"], global_variables.images["20_circles_unselected"], # 0 1 2
+                             global_variables.images["1x_size_unselected"], global_variables.images["2x_size_unselected"], global_variables.images["3x_size_unselected"], # 3 4 5
+                             global_variables.images["5_circles_selected"], global_variables.images["10_circles_selected"], global_variables.images["20_circles_selected"], # 6 7 8
+                             global_variables.images["1x_size_selected"], global_variables.images["2x_size_selected"], global_variables.images["3x_size_selected"],] # 9 10 11
+
+        # DEFAULT DIFFICULTY OPTIONS___
+        circle_number_5 = Button(image=difficulty_images[c5], pos=(234*screen_scaler, 605*screen_scaler), text_input="", 
+                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        circle_number_5.update(screen) 
+
+        circle_number_10 = Button(image=difficulty_images[c10], pos=(324*screen_scaler, 605*screen_scaler), text_input="", 
+                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        circle_number_10.update(screen) 
+
+        circle_number_20 = Button(image=difficulty_images[c20], pos=(418*screen_scaler, 605*screen_scaler), text_input="", 
+                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        circle_number_20.update(screen) 
+
+        size_1x = Button(image=difficulty_images[c1x], pos=(235*screen_scaler, 705*screen_scaler), text_input="", 
+                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        size_1x.update(screen) 
+
+        size_2x = Button(image=difficulty_images[c2x], pos=(334*screen_scaler, 705*screen_scaler), text_input="", 
+                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        size_2x.update(screen) 
+
+        size_3x = Button(image=difficulty_images[c3x], pos=(432*screen_scaler, 705*screen_scaler), text_input="", 
+                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        size_3x.update(screen) 
+
+        # ___DEFAULT DIFFICULTY OPTIONS
 
         start_button = Button(image=global_variables.images["start_button"], pos=(720*screen_scaler, 900*screen_scaler), text_input="START LVL", 
                              font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
@@ -71,18 +109,43 @@ def circles_numbers_timed():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    ShowStartScreen = False
+                    show_n_circles_timed = False
                     running = True
                     circle_pos_x = new_cricle_x()
                     circle_pos_y = new_cricle_y()    
                 if event.key == pygame.K_ESCAPE:
-                    ShowStartScreen = False
+                    show_n_circles_timed = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if start_button.checkForInput(mouse_pos):
-                    ShowStartScreen = False
+                    show_n_circles_timed = False
                     running = True
                     circle_pos_x = new_cricle_x()
-                    circle_pos_y = new_cricle_y()                
+                    circle_pos_y = new_cricle_y()  
+
+                if circle_number_5.checkForInput(mouse_pos):
+                    c5 = 6
+                    c10 = 1
+                    c20 = 2           
+                if circle_number_10.checkForInput(mouse_pos):
+                    c5 = 0
+                    c10 = 7
+                    c20 = 2    
+                if circle_number_20.checkForInput(mouse_pos):
+                    c5 = 0
+                    c10 = 1
+                    c20 = 8  
+                if size_1x.checkForInput(mouse_pos):
+                    c1x = 9
+                    c2x = 4
+                    c3x = 5 
+                if size_2x.checkForInput(mouse_pos):
+                    c1x = 3
+                    c2x = 10
+                    c3x = 5    
+                if size_3x.checkForInput(mouse_pos):
+                    c1x = 3
+                    c2x = 4
+                    c3x = 11     
 
         pygame.display.flip()
 
@@ -117,7 +180,7 @@ def circles_numbers_timed():
                     circle = Button(image=global_variables.images["circle"], pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
                     circle.update(screen)
 
-        if score == 20:
+        if score == 10:
             running = False
             end_time = pygame.time.get_ticks()
             final_time = (end_time-start_time)/1000
