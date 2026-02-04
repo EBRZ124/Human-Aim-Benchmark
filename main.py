@@ -53,6 +53,8 @@ def circles_numbers_timed():
     running = False
     wait = False
     score = 0
+    score_needed = 10
+    circle_size_played = 1
     c5 = 0
     c10 = 7
     c20 = 2
@@ -70,6 +72,8 @@ def circles_numbers_timed():
                              global_variables.images["1x_size_unselected"], global_variables.images["2x_size_unselected"], global_variables.images["3x_size_unselected"], # 3 4 5
                              global_variables.images["5_circles_selected"], global_variables.images["10_circles_selected"], global_variables.images["20_circles_selected"], # 6 7 8
                              global_variables.images["1x_size_selected"], global_variables.images["2x_size_selected"], global_variables.images["3x_size_selected"],] # 9 10 11
+
+        circle_sizes = [global_variables.images["circle_1x"], global_variables.images["circle_2x"], global_variables.images["circle_3x"]]
 
         # DEFAULT DIFFICULTY OPTIONS___
         circle_number_5 = Button(image=difficulty_images[c5], pos=(234*screen_scaler, 605*screen_scaler), text_input="", 
@@ -125,27 +129,33 @@ def circles_numbers_timed():
                 if circle_number_5.checkForInput(mouse_pos):
                     c5 = 6
                     c10 = 1
-                    c20 = 2           
+                    c20 = 2    
+                    score_needed = 5       
                 if circle_number_10.checkForInput(mouse_pos):
                     c5 = 0
                     c10 = 7
                     c20 = 2    
+                    score_needed = 10
                 if circle_number_20.checkForInput(mouse_pos):
                     c5 = 0
                     c10 = 1
                     c20 = 8  
+                    score_needed = 20
                 if size_1x.checkForInput(mouse_pos):
                     c1x = 9
                     c2x = 4
                     c3x = 5 
+                    circle_size_played = 0
                 if size_2x.checkForInput(mouse_pos):
                     c1x = 3
                     c2x = 10
-                    c3x = 5    
+                    c3x = 5   
+                    circle_size_played = 1
                 if size_3x.checkForInput(mouse_pos):
                     c1x = 3
                     c2x = 4
-                    c3x = 11     
+                    c3x = 11   
+                    circle_size_played = 2  
 
         pygame.display.flip()
 
@@ -156,7 +166,8 @@ def circles_numbers_timed():
         screen.blit(global_variables.images["circle_numbers_timed_bg"], (0, 0))
         screen.blit(global_variables.images["playing_area"], (0, 0))
 
-        circle = Button(image=global_variables.images["circle"], pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
+        circle = Button(image=circle_sizes[circle_size_played], pos=(circle_pos_x, circle_pos_y), 
+                        text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
         circle.update(screen)
 
         font = pygame.font.Font(None, int(60*screen_scaler))
@@ -177,10 +188,10 @@ def circles_numbers_timed():
                     score += 1
                     circle_pos_x= new_cricle_x()
                     circle_pos_y= new_cricle_y()
-                    circle = Button(image=global_variables.images["circle"], pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
+                    circle = Button(image=circle_sizes[circle_size_played], pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
                     circle.update(screen)
 
-        if score == 10:
+        if score == score_needed:
             running = False
             end_time = pygame.time.get_ticks()
             final_time = (end_time-start_time)/1000

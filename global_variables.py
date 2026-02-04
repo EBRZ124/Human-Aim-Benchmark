@@ -38,7 +38,9 @@ def load_assets():
         "3x_size_selected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/3x_size_selected.png"),
 
         # ------------------------ LEVEL ASSETS ------------------------      
-        "circle": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle.png"),
+        "circle_1x": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle_1x.png"),
+        "circle_2x": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle_2x.png"),
+        "circle_3x": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle_3x.png"),
         "3": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/3.png"),
         "2": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/2.png"),
         "1": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/1.png"),
