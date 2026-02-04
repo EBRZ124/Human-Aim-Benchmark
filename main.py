@@ -102,10 +102,15 @@ def circles_numbers_timed():
 
         # ___DEFAULT DIFFICULTY OPTIONS
 
-        start_button = Button(image=global_variables.images["start_button"], pos=(720*screen_scaler, 900*screen_scaler), text_input="START LVL", 
+        start_button = Button(image=global_variables.images["start_button"], pos=(900*screen_scaler, 900*screen_scaler), text_input="START LVL", 
                              font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
         start_button.changeColor(mouse_pos)
         start_button.update(screen)  
+
+        go_back_button = Button(image=global_variables.images["start_button"], pos=(540*screen_scaler, 900*screen_scaler), text_input="GO BACK", 
+                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        go_back_button.changeColor(mouse_pos)
+        go_back_button.update(screen)  
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -125,6 +130,8 @@ def circles_numbers_timed():
                     running = True
                     circle_pos_x = new_cricle_x()
                     circle_pos_y = new_cricle_y()  
+                if go_back_button.checkForInput(mouse_pos):
+                    show_n_circles_timed = False
 
                 if circle_number_5.checkForInput(mouse_pos):
                     c5 = 6
@@ -230,9 +237,11 @@ def result_circles_numbers_timed(time_spent):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     results = False
+                    circles_numbers_timed()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if exit_button.checkForInput(mouse_pos):
                     results = False
+                    circles_numbers_timed()
 
         pygame.display.flip()
 
