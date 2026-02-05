@@ -2,7 +2,7 @@ import pygame
 pygame.init()
 pygame.mixer.init()
 
-global_scaler = 1
+global_scaler = 0.85
 
 original_images = {}
 
@@ -17,11 +17,16 @@ def load_assets():
     original_images = {
         # ------------------------ MENU ASSETS ------------------------
         "main_menu_bg": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/main_bg.png"),
+        "level_select_background": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/level_select_background.png"),
         "circle_numbers_timed_bg": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle_numbers_timed_bg.png"),
+        "circles_in_time_bg": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circles_int_time_bg.png"),
         "background_dimmer": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/background_dimmer.png"),
         "playing_area": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/playing_area.png"),
         "n_circles_timed": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/n_circles_timed.png"),
+        "circles_in_time_desc": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circles_in_time_desc.png"),
         "start_button": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/start_level_button.png"),
+        "arrow_right": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/arrow_right.png"),
+        "arrow_left": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/arrow_left.png"),
         
          # ------------------------ CIRCLE OPTION ASSETS ------------------------      
         "5_circles_unselected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/5_circles_unselected.png"),
@@ -36,6 +41,12 @@ def load_assets():
         "1x_size_selected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/1x_size_selected.png"),
         "2x_size_selected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/2x_size_selected.png"),
         "3x_size_selected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/3x_size_selected.png"),
+        "5s_limit_unselected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/5s_limit_unselected.png"),   
+        "10s_limit_unselected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/10s_limit_unselected.png"),
+        "20s_limit_unselected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/20s_limit_unselected.png"),
+        "5s_limit_selected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/5s_limit_selected.png"),
+        "10s_limit_selected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/10s_limit_selected.png"),
+        "20s_limit_selected": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/20s_limit_selected.png"),
 
         # ------------------------ LEVEL ASSETS ------------------------      
         "circle_1x": pygame.image.load("/Users/evaldsberzins/pygame/human_benchmark/graphics/circle_1x.png"),
