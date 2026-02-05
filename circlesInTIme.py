@@ -38,6 +38,11 @@ def circles_in_time(screen, time_limit, circle_passed):
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_text, (121*screen_scaler, 30*screen_scaler))
 
+        displayed_time = round(elapsed_time, 1)
+
+        time_text = font.render(f"Time: {displayed_time}s", True, (255, 255, 255))
+        screen.blit(time_text, (1100*screen_scaler, 30*screen_scaler))
+
         events = pygame.event.get()
 
         for event in events:
