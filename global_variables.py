@@ -73,7 +73,7 @@ def load_assets():
         "2": pygame.image.load("../human_benchmark/graphics/2.png"),
         "1": pygame.image.load("../human_benchmark/graphics/1.png"),
         "result_screen": pygame.image.load("../human_benchmark/graphics/result_screen.png"),
-        "exit_button": pygame.image.load("../human_benchmark/graphics/exit-result-button.png"),
+        "exit_level_button": pygame.image.load("../human_benchmark/graphics/exit_level_button.png"),
     }
 
 def apply_scaling():

@@ -6,11 +6,11 @@ pygame.mixer.init()
 clock = pygame.time.Clock()
 
 def new_cricle_x(screen_scaler):
-    circle_pos_x = random.randint(160, 1270)*screen_scaler
+    circle_pos_x = random.randint(214, 1224)*screen_scaler
     return circle_pos_x
 
 def new_cricle_y(screen_scaler):
-    circle_pos_y = random.randint(150, 940)*screen_scaler
+    circle_pos_y = random.randint(185, 897)*screen_scaler
     return circle_pos_y
 
 def circles_numbers_timed(screen, score_needed, circle_passed, screen_scaler):
@@ -79,9 +79,8 @@ def result_circles_numbers_timed(screen, time_spent, score_needed, circle_passed
         time_spen_rect = time_spent_text.get_rect(center=(720*screen_scaler, 620*screen_scaler))
         screen.blit(time_spent_text, time_spen_rect)
 
-        exit_button = Button(image=global_variables.images["exit_button"], pos=(720*screen_scaler, 860*screen_scaler), text_input="Exit level", 
+        exit_button = Button(image=global_variables.images["exit_level_button"], pos=(720*screen_scaler, 869*screen_scaler), text_input="", 
                              font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        exit_button.changeColor(mouse_pos)
         exit_button.update(screen)  
 
         events = pygame.event.get()
