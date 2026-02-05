@@ -80,8 +80,14 @@ def result_circles_numbers_timed(screen, score, time_limit, circle_passed):
         screen.blit(hit_time_average, hit_average_rect)
 
         time_spent_text = global_variables.result_screen_font(int(55*screen_scaler)).render(f"Time limit: {time_limit} sec", True, "White")
-        time_spen_rect = time_spent_text.get_rect(center=(720*screen_scaler, 620*screen_scaler))
+        time_spen_rect = time_spent_text.get_rect(center=(720*screen_scaler, 550*screen_scaler))
         screen.blit(time_spent_text, time_spen_rect)
+
+        hit_average_score = round(score/time_limit, 2)
+        
+        hits_per_second = global_variables.result_screen_font(int(55*screen_scaler)).render(f"Hits per second: {hit_average_score}", True, "White")
+        hits_per_second_rect = hits_per_second.get_rect(center=(720*screen_scaler, 680*screen_scaler))
+        screen.blit(hits_per_second, hits_per_second_rect)
 
         exit_button = Button(image=global_variables.images["exit_button"], pos=(720*screen_scaler, 860*screen_scaler), text_input="Exit level", 
                              font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
