@@ -4,21 +4,20 @@ from buttons import Button
 pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
-screen_scaler = global_variables.global_scaler
 
-def new_cricle_x():
+def new_cricle_x(screen_scaler):
     circle_pos_x = random.randint(160, 1270)*screen_scaler
     return circle_pos_x
 
-def new_cricle_y():
+def new_cricle_y(screen_scaler):
     circle_pos_y = random.randint(150, 940)*screen_scaler
     return circle_pos_y
 
-def circles_in_time(screen, time_limit, circle_passed):
+def circles_in_time(screen, time_limit, circle_passed, screen_scaler):
     level_start_time = pygame.time.get_ticks()
     running = True
-    circle_pos_x = new_cricle_x()
-    circle_pos_y = new_cricle_y()
+    circle_pos_x = new_cricle_x(screen_scaler)
+    circle_pos_y = new_cricle_y(screen_scaler)
     score = 0
 
     while running:
@@ -55,18 +54,18 @@ def circles_in_time(screen, time_limit, circle_passed):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if circle.checkForInput(mouse_pos):
                     score += 1
-                    circle_pos_x= new_cricle_x()
-                    circle_pos_y= new_cricle_y()
+                    circle_pos_x= new_cricle_x(screen_scaler)
+                    circle_pos_y= new_cricle_y(screen_scaler)
                     circle = Button(image=circle_passed, pos=(circle_pos_x, circle_pos_y), text_input="", font=global_variables.get_main_menu_font(2), base_color="White", hovering_color="White")
                     circle.update(screen)
 
         if elapsed_time >= time_limit:
             running = False
-            result_circles_numbers_timed(screen, score, time_limit, circle_passed)
+            result_circles_numbers_timed(screen, score, time_limit, circle_passed, screen_scaler)
 
         pygame.display.flip()
 
-def result_circles_numbers_timed(screen, score, time_limit, circle_passed):
+def result_circles_numbers_timed(screen, score, time_limit, circle_passed, screen_scaler):
     results = True
     while results:
         mouse_pos = pygame.mouse.get_pos()

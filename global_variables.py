@@ -32,6 +32,8 @@ def load_assets():
         "start_button": pygame.image.load("../human_benchmark/graphics/start_level_button.png"),
         "arrow_right": pygame.image.load("../human_benchmark/graphics/arrow_right.png"),
         "arrow_left": pygame.image.load("../human_benchmark/graphics/arrow_left.png"),
+        "back_button_blue": pygame.image.load("../human_benchmark/graphics/back_button_blue.png"),
+        "menu_play_button": pygame.image.load("../human_benchmark/graphics/level_play_button.png"),
 
         # ------------------------ OPTIONS SCREEN ASSETS ------------------------
         "options_menu_screen": pygame.image.load("../human_benchmark/graphics/options_menu_screen.png"),
