@@ -45,7 +45,7 @@ def main_menu():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(mouse_pos):
-                    game_select_n_circles_timed()
+                    game_select_screen()
                 if exit_button.checkForInput(mouse_pos):
                     pygame.quit()
                     sys.exit()
@@ -137,8 +137,9 @@ def options_menu():
 
         pygame.display.update()
 
-# ------------------------------------------------ BENCHMARK 1 ------------------------------------------------
-def game_select_n_circles_timed():
+# -------------------------------------------------------------- universal menu --------------------------------------------------------------
+
+def game_select_screen():
     circle_sizes = [global_variables.images["1x_size_unselected"], global_variables.images["2x_size_unselected"], global_variables.images["3x_size_unselected"],
                     global_variables.images["1x_size_selected"], global_variables.images["2x_size_selected"], global_variables.images["3x_size_selected"]]
     
@@ -158,132 +159,6 @@ def game_select_n_circles_timed():
     passed_n_number = 10
 
     circles_passed = [global_variables.images["circle_1x"], global_variables.images["circle_2x"], global_variables.images["circle_3x"]]
-
-    # game shown
-    game_shown = 1
-
-    running = True
-
-    while running:
-        mouse_pos = pygame.mouse.get_pos()
-
-        screen.blit(global_variables.images["level_select_background"], (0, 0))
-        screen.blit(global_variables.images["n_circles_timed"], (0, 0))
-
-        back_button_blue = Button(image=global_variables.images["back_button_blue"], pos=(80*screen_scaler, 80*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        back_button_blue.update(screen) 
-
-        # ------------------ LEVEL DIFFICULTIES ------------------
-        circle_number_5 = Button(image=number_of_circles[n_circles_5], pos=(234*screen_scaler, 605*screen_scaler), text_input="", 
-                            font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        circle_number_5.update(screen) 
-
-        circle_number_10 = Button(image=number_of_circles[n_circles_10], pos=(324*screen_scaler, 605*screen_scaler), text_input="", 
-                            font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        circle_number_10.update(screen) 
-
-        circle_number_20 = Button(image=number_of_circles[n_circles_20], pos=(418*screen_scaler, 605*screen_scaler), text_input="", 
-                            font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        circle_number_20.update(screen) 
-
-
-        size_1x = Button(image=circle_sizes[circle_size_1], pos=(235*screen_scaler, 705*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        size_1x.update(screen) 
-
-        size_2x = Button(image=circle_sizes[circle_size_2], pos=(334*screen_scaler, 705*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        size_2x.update(screen) 
-
-        size_3x = Button(image=circle_sizes[circle_size_3], pos=(432*screen_scaler, 705*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        size_3x.update(screen) 
-
-        # --------------------------------------------------------
-
-        play_button = Button(image=global_variables.images["menu_play_button"], pos=(1106*screen_scaler, 885*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        play_button.update(screen)  
-
-        arrow_right_button = Button(image=global_variables.images["arrow_right"], pos=(1377*screen_scaler, 540*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        arrow_right_button.changeColor(mouse_pos)
-        arrow_right_button.update(screen)  
-
-        arrow_left_button = Button(image=global_variables.images["arrow_left"], pos=(58*screen_scaler, 540*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        arrow_left_button.changeColor(mouse_pos)
-        arrow_left_button.update(screen) 
-
-        events = pygame.event.get()
-
-        for event in events:
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    main_menu()
-                if event.key == pygame.K_RIGHT:
-                    game_select_circles_in_time()
-                if event.key == pygame.K_LEFT:
-                    game_select_precise_circles_timed()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if play_button.checkForInput(mouse_pos):
-                    nCirclesTimed.circles_numbers_timed(screen, passed_n_number, circles_passed[passed_circle_size], screen_scaler)
-                if arrow_left_button.checkForInput(mouse_pos):
-                    game_select_precise_circles_timed()
-                if arrow_right_button.checkForInput(mouse_pos):
-                    game_select_circles_in_time()
-                if back_button_blue.checkForInput(mouse_pos):
-                    main_menu()
-
-                if size_1x.checkForInput(mouse_pos):
-                    circle_size_1 = 3
-                    circle_size_2 = 1
-                    circle_size_3 = 2
-                    passed_circle_size = 0
-                if size_2x.checkForInput(mouse_pos):
-                    circle_size_1 = 0
-                    circle_size_2 = 4
-                    circle_size_3 = 2
-                    passed_circle_size = 1
-                if size_3x.checkForInput(mouse_pos):
-                    circle_size_1 = 0
-                    circle_size_2 = 1
-                    circle_size_3 = 5
-                    passed_circle_size = 2
-
-                if circle_number_5.checkForInput(mouse_pos):
-                    n_circles_5 = 3
-                    n_circles_10 = 1
-                    n_circles_20 = 2
-                    passed_n_number = 5
-                if circle_number_10.checkForInput(mouse_pos):
-                    n_circles_5 = 0
-                    n_circles_10 = 4
-                    n_circles_20 = 2
-                    passed_n_number = 10
-                if circle_number_20.checkForInput(mouse_pos):
-                    n_circles_5 = 0
-                    n_circles_10 = 1
-                    n_circles_20 = 5
-                    passed_n_number = 20
-
-        pygame.display.flip()
-
-# ------------------------------------------------ BENCHMARK 2 ------------------------------------------------
-def game_select_circles_in_time():
-    circle_sizes = [global_variables.images["1x_size_unselected"], global_variables.images["2x_size_unselected"], global_variables.images["3x_size_unselected"],
-                    global_variables.images["1x_size_selected"], global_variables.images["2x_size_selected"], global_variables.images["3x_size_selected"]]
-    
-    # default size
-    circle_size_1 = 0
-    circle_size_2 = 4
-    circle_size_3 = 2
-    passed_circle_size = 1
 
     time_limit = [global_variables.images["5s_limit_unselected"], global_variables.images["10s_limit_unselected"], global_variables.images["20s_limit_unselected"],
                   global_variables.images["5s_limit_selected"], global_variables.images["10s_limit_selected"], global_variables.images["20s_limit_selected"]]
@@ -294,32 +169,45 @@ def game_select_circles_in_time():
     time_limit_20 = 2
     time_limit_passed = 10
 
-    circles_passed = [global_variables.images["circle_1x"], global_variables.images["circle_2x"], global_variables.images["circle_3x"]]
+    game_decription = [global_variables.images["n_circles_timed"], global_variables.images["circles_in_time_desc"],
+                       global_variables.images["precise_circles_timed"]]
+    
+    # default game shown
+    game_shown = 0
 
     running = True
-
     while running:
-        screen.blit(global_variables.images["level_select_background"], (0, 0))
-        screen.blit(global_variables.images["circles_in_time_desc"], (0, 0))
         mouse_pos = pygame.mouse.get_pos()
-        events = pygame.event.get()
 
-        back_button_blue = Button(image=global_variables.images["back_button_blue"], pos=(80*screen_scaler, 80*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        back_button_blue.update(screen) 
+        screen.blit(global_variables.images["level_select_background"], (0, 0))
+        screen.blit(game_decription[game_shown], (0, 0))
 
-        # DIFFICULTY SETTINGS
-        time_limit_5s = Button(image=time_limit[time_limit_5], pos=(210*screen_scaler, 605*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        time_limit_5s.update(screen) 
+        # ---- DIFFICULTY OPTIONS ----
+        if game_shown == 0 or game_shown == 2:
+            circle_number_5 = Button(image=number_of_circles[n_circles_5], pos=(234*screen_scaler, 605*screen_scaler), text_input="", 
+                                font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+            circle_number_5.update(screen) 
 
-        time_limit_10s = Button(image=time_limit[time_limit_10], pos=(324*screen_scaler, 605*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        time_limit_10s.update(screen) 
+            circle_number_10 = Button(image=number_of_circles[n_circles_10], pos=(324*screen_scaler, 605*screen_scaler), text_input="", 
+                                font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+            circle_number_10.update(screen) 
 
-        time_limit_20s = Button(image=time_limit[time_limit_20], pos=(448*screen_scaler, 605*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        time_limit_20s.update(screen) 
+            circle_number_20 = Button(image=number_of_circles[n_circles_20], pos=(418*screen_scaler, 605*screen_scaler), text_input="", 
+                                font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+            circle_number_20.update(screen) 
+
+        else:
+            time_limit_5s = Button(image=time_limit[time_limit_5], pos=(210*screen_scaler, 605*screen_scaler), text_input="", 
+                                font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+            time_limit_5s.update(screen) 
+
+            time_limit_10s = Button(image=time_limit[time_limit_10], pos=(324*screen_scaler, 605*screen_scaler), text_input="", 
+                                font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+            time_limit_10s.update(screen) 
+
+            time_limit_20s = Button(image=time_limit[time_limit_20], pos=(448*screen_scaler, 605*screen_scaler), text_input="", 
+                                font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+            time_limit_20s.update(screen) 
 
         size_1x = Button(image=circle_sizes[circle_size_1], pos=(235*screen_scaler, 705*screen_scaler), text_input="", 
                              font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
@@ -332,21 +220,24 @@ def game_select_circles_in_time():
         size_3x = Button(image=circle_sizes[circle_size_3], pos=(432*screen_scaler, 705*screen_scaler), text_input="", 
                              font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
         size_3x.update(screen) 
-        # DIFFICULTY SETTINGS
-
-        play_button = Button(image=global_variables.images["menu_play_button"], pos=(1106*screen_scaler, 885*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        play_button.update(screen)  
-
+        # ----------------------------
         arrow_right_button = Button(image=global_variables.images["arrow_right"], pos=(1377*screen_scaler, 540*screen_scaler), text_input="", 
                              font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        arrow_right_button.changeColor(mouse_pos)
         arrow_right_button.update(screen)  
 
         arrow_left_button = Button(image=global_variables.images["arrow_left"], pos=(58*screen_scaler, 540*screen_scaler), text_input="", 
                              font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        arrow_left_button.changeColor(mouse_pos)
         arrow_left_button.update(screen) 
+
+        play_button = Button(image=global_variables.images["menu_play_button"], pos=(1106*screen_scaler, 885*screen_scaler), text_input="", 
+                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        play_button.update(screen) 
+
+        back_button_blue = Button(image=global_variables.images["back_button_blue"], pos=(80*screen_scaler, 80*screen_scaler), text_input="", 
+                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
+        back_button_blue.update(screen) 
+
+        events = pygame.event.get()
 
         for event in events:
             if event.type == pygame.QUIT:
@@ -356,19 +247,35 @@ def game_select_circles_in_time():
                 if event.key == pygame.K_ESCAPE:
                     main_menu()
                 if event.key == pygame.K_RIGHT:
-                    game_select_precise_circles_timed()
+                    if game_shown == 0 or game_shown == 1:
+                        game_shown += 1
+                    else:
+                        game_shown = 0
                 if event.key == pygame.K_LEFT:
-                    game_select_n_circles_timed()
-
+                    if game_shown == 2 or game_shown == 1:
+                        game_shown -= 1
+                    else:
+                        game_shown = 2
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if play_button.checkForInput(mouse_pos):
-                    circlesInTIme.circles_in_time(screen, time_limit_passed, circles_passed[passed_circle_size], screen_scaler)
                 if arrow_left_button.checkForInput(mouse_pos):
-                    game_select_n_circles_timed()
+                    if game_shown == 2 or game_shown == 1:
+                        game_shown -= 1
+                    else:
+                        game_shown = 2
+                    continue
                 if arrow_right_button.checkForInput(mouse_pos):
-                    game_select_precise_circles_timed()
-                if back_button_blue.checkForInput(mouse_pos):
-                    main_menu()
+                    if game_shown == 0 or game_shown == 1:
+                        game_shown += 1
+                    else:
+                        game_shown = 0
+                    continue
+                if play_button.checkForInput(mouse_pos):
+                    if game_shown == 0:
+                        nCirclesTimed.circles_numbers_timed(screen, passed_n_number, circles_passed[passed_circle_size], screen_scaler)
+                    if game_shown == 1:
+                        circlesInTIme.circles_in_time(screen, time_limit_passed, circles_passed[passed_circle_size], screen_scaler)
+                    if game_shown == 2:
+                        preciseNCirclesTimed.precise_circles_timed(screen, passed_n_number, circles_passed[passed_circle_size], screen_scaler)
 
                 if size_1x.checkForInput(mouse_pos):
                     circle_size_1 = 3
@@ -385,160 +292,47 @@ def game_select_circles_in_time():
                     circle_size_2 = 1
                     circle_size_3 = 5
                     passed_circle_size = 2
+                    
+                if game_shown == 1:
+                    if time_limit_5s.checkForInput(mouse_pos):
+                        time_limit_5 = 3
+                        time_limit_10 = 1
+                        time_limit_20 = 2
+                        time_limit_passed = 5
+                    if time_limit_10s.checkForInput(mouse_pos):
+                        time_limit_5 = 0
+                        time_limit_10 = 4
+                        time_limit_20 = 2
+                        time_limit_passed = 10
+                    if time_limit_20s.checkForInput(mouse_pos):
+                        time_limit_5 = 0
+                        time_limit_10 = 1
+                        time_limit_20 = 5
+                        time_limit_passed = 20
 
-                if time_limit_5s.checkForInput(mouse_pos):
-                    time_limit_5 = 3
-                    time_limit_10 = 1
-                    time_limit_20 = 2
-                    time_limit_passed = 5
-                if time_limit_10s.checkForInput(mouse_pos):
-                    time_limit_5 = 0
-                    time_limit_10 = 4
-                    time_limit_20 = 2
-                    time_limit_passed = 10
-                if time_limit_20s.checkForInput(mouse_pos):
-                    time_limit_5 = 0
-                    time_limit_10 = 1
-                    time_limit_20 = 5
-                    time_limit_passed = 20
-
-        pygame.display.flip()
-# ------------------------------------------------ BENCHMARK 3 ------------------------------------------------
-def game_select_precise_circles_timed():
-    circle_sizes = [global_variables.images["1x_size_unselected"], global_variables.images["2x_size_unselected"], global_variables.images["3x_size_unselected"],
-                    global_variables.images["1x_size_selected"], global_variables.images["2x_size_selected"], global_variables.images["3x_size_selected"]]
-    
-    # default size
-    circle_size_1 = 0
-    circle_size_2 = 4
-    circle_size_3 = 2
-    passed_circle_size = 1
-    
-    number_of_circles = [global_variables.images["5_circles_unselected"], global_variables.images["10_circles_unselected"], global_variables.images["20_circles_unselected"],
-                         global_variables.images["5_circles_selected"], global_variables.images["10_circles_selected"], global_variables.images["20_circles_selected"]]
-
-    # default number of circles
-    n_circles_5 = 0
-    n_circles_10 = 4
-    n_circles_20 = 2 
-    passed_n_number = 10
-
-    circles_passed = [global_variables.images["circle_1x"], global_variables.images["circle_2x"], global_variables.images["circle_3x"]]
-
-    # game shown
-    game_shown = 1
-
-    running = True
-
-    while running:
-        mouse_pos = pygame.mouse.get_pos()
-
-        screen.blit(global_variables.images["level_select_background"], (0, 0))
-        screen.blit(global_variables.images["precise_circles_timed"], (0, 0))
-
-        back_button_blue = Button(image=global_variables.images["back_button_blue"], pos=(80*screen_scaler, 80*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        back_button_blue.update(screen) 
-
-        # ------------------ LEVEL DIFFICULTIES ------------------
-        circle_number_5 = Button(image=number_of_circles[n_circles_5], pos=(234*screen_scaler, 605*screen_scaler), text_input="", 
-                            font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        circle_number_5.update(screen) 
-
-        circle_number_10 = Button(image=number_of_circles[n_circles_10], pos=(324*screen_scaler, 605*screen_scaler), text_input="", 
-                            font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        circle_number_10.update(screen) 
-
-        circle_number_20 = Button(image=number_of_circles[n_circles_20], pos=(418*screen_scaler, 605*screen_scaler), text_input="", 
-                            font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        circle_number_20.update(screen) 
+                if game_shown == 2 or game_shown == 0:
+                    if circle_number_5.checkForInput(mouse_pos):
+                        n_circles_5 = 3
+                        n_circles_10 = 1
+                        n_circles_20 = 2
+                        passed_n_number = 5
+                    if circle_number_10.checkForInput(mouse_pos):
+                        n_circles_5 = 0
+                        n_circles_10 = 4
+                        n_circles_20 = 2
+                        passed_n_number = 10
+                    if circle_number_20.checkForInput(mouse_pos):
+                        n_circles_5 = 0
+                        n_circles_10 = 1
+                        n_circles_20 = 5
+                        passed_n_number = 20
 
 
-        size_1x = Button(image=circle_sizes[circle_size_1], pos=(235*screen_scaler, 705*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        size_1x.update(screen) 
-
-        size_2x = Button(image=circle_sizes[circle_size_2], pos=(334*screen_scaler, 705*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        size_2x.update(screen) 
-
-        size_3x = Button(image=circle_sizes[circle_size_3], pos=(432*screen_scaler, 705*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(5*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        size_3x.update(screen) 
-
-        # --------------------------------------------------------
-
-        play_button = Button(image=global_variables.images["menu_play_button"], pos=(1106*screen_scaler, 885*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        play_button.update(screen)  
-
-        arrow_right_button = Button(image=global_variables.images["arrow_right"], pos=(1377*screen_scaler, 540*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        arrow_right_button.changeColor(mouse_pos)
-        arrow_right_button.update(screen)  
-
-        arrow_left_button = Button(image=global_variables.images["arrow_left"], pos=(58*screen_scaler, 540*screen_scaler), text_input="", 
-                             font = global_variables.get_main_menu_font(int(50*screen_scaler)), base_color="White", hovering_color="#D3FCFE")
-        arrow_left_button.changeColor(mouse_pos)
-        arrow_left_button.update(screen) 
-
-        events = pygame.event.get()
-
-        for event in events:
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    main_menu()
-                if event.key == pygame.K_RIGHT:
-                    game_select_n_circles_timed()
-                if event.key == pygame.K_LEFT:
-                    game_select_circles_in_time()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if play_button.checkForInput(mouse_pos):
-                    preciseNCirclesTimed.precise_circles_timed(screen, passed_n_number, circles_passed[passed_circle_size], screen_scaler)
-                if arrow_left_button.checkForInput(mouse_pos):
-                    game_select_circles_in_time()
-                if arrow_right_button.checkForInput(mouse_pos):
-                    game_select_n_circles_timed()
                 if back_button_blue.checkForInput(mouse_pos):
                     main_menu()
 
-                if size_1x.checkForInput(mouse_pos):
-                    circle_size_1 = 3
-                    circle_size_2 = 1
-                    circle_size_3 = 2
-                    passed_circle_size = 0
-                if size_2x.checkForInput(mouse_pos):
-                    circle_size_1 = 0
-                    circle_size_2 = 4
-                    circle_size_3 = 2
-                    passed_circle_size = 1
-                if size_3x.checkForInput(mouse_pos):
-                    circle_size_1 = 0
-                    circle_size_2 = 1
-                    circle_size_3 = 5
-                    passed_circle_size = 2
-
-                if circle_number_5.checkForInput(mouse_pos):
-                    n_circles_5 = 3
-                    n_circles_10 = 1
-                    n_circles_20 = 2
-                    passed_n_number = 5
-                if circle_number_10.checkForInput(mouse_pos):
-                    n_circles_5 = 0
-                    n_circles_10 = 4
-                    n_circles_20 = 2
-                    passed_n_number = 10
-                if circle_number_20.checkForInput(mouse_pos):
-                    n_circles_5 = 0
-                    n_circles_10 = 1
-                    n_circles_20 = 5
-                    passed_n_number = 20
-
         pygame.display.flip()
+
 
 def new_cricle_x():
     circle_pos_x = random.randint(160, 1270)*screen_scaler
