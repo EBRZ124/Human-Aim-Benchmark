@@ -27,6 +27,7 @@ def load_assets():
         "circles_in_time_bg": pygame.image.load("../human_benchmark/graphics/circles_int_time_bg.png"),
         "background_dimmer": pygame.image.load("../human_benchmark/graphics/background_dimmer.png"),
         "playing_area": pygame.image.load("../human_benchmark/graphics/playing_area.png"),
+        "precise_circles_timed": pygame.image.load("../human_benchmark/graphics/precise_circles_timed_desc.png"),
         "n_circles_timed": pygame.image.load("../human_benchmark/graphics/n_circles_timed.png"),
         "circles_in_time_desc": pygame.image.load("../human_benchmark/graphics/circles_in_time_desc.png"),
         "start_button": pygame.image.load("../human_benchmark/graphics/start_level_button.png"),
