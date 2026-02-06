@@ -12,3 +12,12 @@ A game that focuses on the 2 dimensional cursor movements and reading of objects
 #### Result Screen
 <img width="1437" height="1073" alt="image" src="https://github.com/user-attachments/assets/88faf75f-5b17-46d8-a36c-19fa0551cc79" />
 
+## Why I made this
+
+- Improve at function calling and logic
+
+- Improve data structure usage
+
+- Improve at design
+
+- Have fun :)
